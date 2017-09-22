@@ -74,6 +74,7 @@
 #define HAL_INS_AERO        18
 #define HAL_INS_MPU6500     19
 #define HAL_INS_LSM9DS1     20
+#define HAL_INS_NAVIO2      21
 
 /* Barometer driver types */
 #define HAL_BARO_BMP085      1
