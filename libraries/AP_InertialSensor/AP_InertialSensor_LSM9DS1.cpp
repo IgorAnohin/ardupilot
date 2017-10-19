@@ -16,8 +16,14 @@ extern const AP_HAL::HAL& hal;
 #define WHO_AM_I     0x68
 
 #define LSM9DS1_DRY_XG_PIN -1
+/*
+ * _gyro_instance = _imu.register_gyro(952, _dev->get_bus_id_devtype(DEVTYPE_GYR_LSM9DS1));
+    _accel_instance = _imu.register_accel(952, _dev->get_bus_id_devtype(DEVTYPE_ACC_LSM9DS1));
+
+    _dev->register_periodic_callback(1000, FUNCTOR_BIND_MEMBER(&AP_InertialSensor_LSM9DS1::_poll_data, void));
 
 
+*/
 /*
  *  Accelerometer and Gyroscope registers
 */
