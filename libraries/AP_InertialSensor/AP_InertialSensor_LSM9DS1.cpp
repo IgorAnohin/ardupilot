@@ -14,186 +14,41 @@ extern const AP_HAL::HAL& hal;
 
 
 #define WHO_AM_I     0x68
-#define WHO_AM_I_M   0x3D
-#define LSM9DS0_DRY_XG_PIN -1
+
+#define LSM9DS1_DRY_XG_PIN -1
 
 
 /*
  *  Accelerometer and Gyroscope registers
 */
-#define LSM9DS1XG_ACT_THS                               0x04
-#   define LSM9DS1XG_ACT_THS_SLEEP_ON             (0x1 << 7)
-#define LSM9DS1XG_ACT_DUR                               0x05
-#define LSM9DS1XG_INT_GEN_CFG_XL                        0x06
-#   define LSM9DS1XG_INT_GEN_CFG_XL_AOI_XL        (0x1 << 7)
-#   define LSM9DS1XG_INT_GEN_CFG_XL_6D            (0x1 << 6)
-#   define LSM9DS1XG_INT_GEN_CFG_XL_ZHIE_XL       (0x1 << 5)
-#   define LSM9DS1XG_INT_GEN_CFG_XL_ZLIE_XL       (0x1 << 4)
-#   define LSM9DS1XG_INT_GEN_CFG_XL_YHIE_XL       (0x1 << 3)
-#   define LSM9DS1XG_INT_GEN_CFG_XL_YLIE_XL       (0x1 << 2)
-#   define LSM9DS1XG_INT_GEN_CFG_XL_XHIE_XL       (0x1 << 1)
-#   define LSM9DS1XG_INT_GEN_CFG_XL_XLIE_XL       (0x1 << 0)
-#define LSM9DS1XG_INT_GEN_THS_X_XL                      0x07
-#define LSM9DS1XG_INT_GEN_THS_Y_XL                      0x08
-#define LSM9DS1XG_INT_GEN_THS_Z_XL                      0x09
-#define LSM9DS1XG_INT_GEN_DUR_XL                        0x0A
-#   define LSM9DS1XG_INT_GEN_DUR_XL_WAIT_XL       (0x1 << 7)
-#define LSM9DS1XG_REFERENCE_G                           0x0B
-#define LSM9DS1XG_INT1_CTRL                             0x0C
-#   define LSM9DS1XG_INT1_CTRL_INT1_IG_G          (0x1 << 7)
-#   define LSM9DS1XG_INT1_CTRL_INT_IG_XL          (0x1 << 6)
-#   define LSM9DS1XG_INT1_CTRL_INT_FSS5           (0x1 << 5)
-#   define LSM9DS1XG_INT1_CTRL_INT_OVR            (0x1 << 4)
-#   define LSM9DS1XG_INT1_CTRL_INT_FTH            (0x1 << 3)
-#   define LSM9DS1XG_INT1_CTRL_INT_Boot           (0x1 << 2)
-#   define LSM9DS1XG_INT1_CTRL_INT_DRDY_G         (0x1 << 1)
-#   define LSM9DS1XG_INT1_CTRL_INT_DRDY_XL        (0x1 << 0)
-#define LSM9DS1XG_INT2_CTRL                             0x0D
-#   define LSM9DS1XG_INT2_CTRL_INT2_INACT         (0x1 << 7)
-#   define LSM9DS1XG_INT2_CTRL_INT2_FSS5          (0x1 << 5)
-#   define LSM9DS1XG_INT2_CTRL_INT2_OVR           (0x1 << 4)
-#   define LSM9DS1XG_INT2_CTRL_INT2_FTH           (0x1 << 3)
-#   define LSM9DS1XG_INT2_CTRL_INT2_DRDY_TEMP     (0x1 << 2)
-#   define LSM9DS1XG_INT2_CTRL_INT2_DRDY_G        (0x1 << 1)
-#   define LSM9DS1XG_INT2_CTRL_INT2_DRDY_XL       (0x1 << 0)
+#define LSM9DS1XG_ACT_THS                               0x04 //only for debugger
+
+
 #define LSM9DS1XG_WHO_AM_I                              0x0F
 #define LSM9DS1XG_CTRL_REG1_G                           0x10
-#   define LSM9DS1XG_CTRL_REG1_G_ODR_G_14900mHz   (0x1 << 5)
-#   define LSM9DS1XG_CTRL_REG1_G_ODR_G_59500mHz   (0x2 << 5)
-#   define LSM9DS1XG_CTRL_REG1_G_ODR_G_119Hz      (0x3 << 5)
-#   define LSM9DS1XG_CTRL_REG1_G_ODR_G_238Hz      (0x4 << 5)
-#   define LSM9DS1XG_CTRL_REG1_G_ODR_G_476Hz      (0x5 << 5)
 #   define LSM9DS1XG_CTRL_REG1_G_ODR_G_952Hz      (0x6 << 5)
-#   define LSM9DS1XG_CTRL_REG1_FS_G_245DPS        (0x0 << 3)
-#   define LSM9DS1XG_CTRL_REG1_FS_G_500DPS        (0x1 << 3)
 #   define LSM9DS1XG_CTRL_REG1_FS_G_2000DPS       (0x3 << 3)
-#define LSM9DS1XG_CTRL_REG2_G                           0x11
-#   define LSM9DS1XG_CTRL_REG2_G_INT_SEL_00       (0x0 << 2)
-#   define LSM9DS1XG_CTRL_REG2_G_INT_SEL_01       (0x1 << 2)
-#   define LSM9DS1XG_CTRL_REG2_G_INT_SEL_10       (0x2 << 2)
-#   define LSM9DS1XG_CTRL_REG2_G_INT_SEL_11       (0x3 << 2)
-#   define LSM9DS1XG_CTRL_REG2_G_OUT_SEL_00       (0x0 << 0)
-#   define LSM9DS1XG_CTRL_REG2_G_OUT_SEL_01       (0x1 << 0)
-#   define LSM9DS1XG_CTRL_REG2_G_OUT_SEL_10       (0x2 << 0)
-#   define LSM9DS1XG_CTRL_REG2_G_OUT_SEL_11       (0x3 << 0)
-#define LSM9DS1XG_CTRL_REG3_G                           0x12
-#   define LSM9DS1XG_CTRL_REG3_G_LP_MODE          (0x1 << 7)
-#   define LSM9DS1XG_CTRL_REG3_G_HP_EN            (0x1 << 6)
-#define LSM9DS1XG_ORIENT_CFG_G                          0x13
-#define LSM9DS1XG_INT_GEN_SRC_G                         0x14
-#   define LSM9DS1XG_INT_GEN_SRC_G_IA_G           (0x1 << 6)
-#   define LSM9DS1XG_INT_GEN_SRC_G_ZH_G           (0x1 << 5)
-#   define LSM9DS1XG_INT_GEN_SRC_G_ZL_G           (0x1 << 4)
-#   define LSM9DS1XG_INT_GEN_SRC_G_YH_G           (0x1 << 3)
-#   define LSM9DS1XG_INT_GEN_SRC_G_YL_G           (0x1 << 2)
-#   define LSM9DS1XG_INT_GEN_SRC_G_XH_G           (0x1 << 1)
-#   define LSM9DS1XG_INT_GEN_SRC_G_XL_G           (0x1 << 0)
-#define LSM9DS1XG_OUT_TEMP_L                            0x15
-#define LSM9DS1XG_OUT_TEMP_H                            0x16
 #define LSM9DS1XG_STATUS_REG                            0x17
-#   define LSM9DS1XG_STATUS_REG_IG_XL             (0x1 << 6)
-#   define LSM9DS1XG_STATUS_REG_IG_G              (0x1 << 5)
-#   define LSM9DS1XG_STATUS_REG_INACT             (0x1 << 4)
-#   define LSM9DS1XG_STATUS_REG_BOOT_STATUS       (0x1 << 3)
-#   define LSM9DS1XG_STATUS_REG_TDA               (0x1 << 2)
 #   define LSM9DS1XG_STATUS_REG_GDA               (0x1 << 1)
 #   define LSM9DS1XG_STATUS_REG_XLDA              (0x1 << 0)
 #define LSM9DS1XG_OUT_X_L_G                             0x18
-#define LSM9DS1XG_OUT_X_H_G                             0x19
-#define LSM9DS1XG_OUT_Y_L_G                             0x1A
-#define LSM9DS1XG_OUT_Y_H_G                             0x1B
-#define LSM9DS1XG_OUT_Z_L_G                             0x1C
-#define LSM9DS1XG_OUT_Z_H_G                             0x1D
 #define LSM9DS1XG_CTRL_REG4                             0x1E
 #   define LSM9DS1XG_CTRL_REG4_Zen_G              (0x1 << 5)
 #   define LSM9DS1XG_CTRL_REG4_Yen_G              (0x1 << 4)
 #   define LSM9DS1XG_CTRL_REG4_Xen_G              (0x1 << 3)
-#   define LSM9DS1XG_CTRL_REG4_LIR_XL1            (0x1 << 1)
-#   define LSM9DS1XG_CTRL_REG4_4D_XL1             (0x1 << 0)
 #define LSM9DS1XG_CTRL_REG5_XL                          0x1F
 #   define LSM9DS1XG_CTRL_REG5_XL_Zen_XL          (0x1 << 5)
 #   define LSM9DS1XG_CTRL_REG5_XL_Yen_XL          (0x1 << 4)
 #   define LSM9DS1XG_CTRL_REG5_XL_Xen_XL          (0x1 << 3)
 #define LSM9DS1XG_CTRL_REG6_XL                          0x20
-#   define LSM9DS1XG_CTRL_REG6_XL_ODR_XL_10Hz     (0x1 << 5)
-#   define LSM9DS1XG_CTRL_REG6_XL_ODR_XL_50Hz     (0x2 << 5)
-#   define LSM9DS1XG_CTRL_REG6_XL_ODR_XL_119Hz    (0x3 << 5)
-#   define LSM9DS1XG_CTRL_REG6_XL_ODR_XL_238Hz    (0x4 << 5)
-#   define LSM9DS1XG_CTRL_REG6_XL_ODR_XL_476Hz    (0x5 << 5)
 #   define LSM9DS1XG_CTRL_REG6_XL_ODR_XL_952Hz    (0x6 << 5)
-#   define LSM9DS1XG_CTRL_REG6_XL_FS_XL_2G        (0x0 << 3)
 #   define LSM9DS1XG_CTRL_REG6_XL_FS_XL_16G       (0x1 << 3)
-#   define LSM9DS1XG_CTRL_REG6_XL_FS_XL_4G        (0x2 << 3)
-#   define LSM9DS1XG_CTRL_REG6_XL_FS_XL_8G        (0x3 << 3)
-#   define LSM9DS1XG_CTRL_REG6_XL_BW_SCAL_ODR     (0x1 << 2)
-#   define LSM9DS1XG_CTRL_REG6_XL_BW_XL_408Hz     (0x0 << 0)
-#   define LSM9DS1XG_CTRL_REG6_XL_BW_XL_211Hz     (0x1 << 0)
-#   define LSM9DS1XG_CTRL_REG6_XL_BW_XL_105Hz     (0x2 << 0)
-#   define LSM9DS1XG_CTRL_REG6_XL_BW_XL_50Hz      (0x3 << 0)
-#define LSM9DS1XG_CTRL_REG7_XL                          0x21
-#   define LSM9DS1XG_CTRL_REG7_XL_FDS             (0x1 << 2)
-#   define LSM9DS1XG_CTRL_REG7_XL_HPIS1           (0x1 << 0)
-#define LSM9DS1XG_CTRL_REG8                             0x22
-#   define LSM9DS1XG_CTRL_REG8_BOOT               (0x1 << 7)
-#   define LSM9DS1XG_CTRL_REG8_BDU                (0x1 << 6)
-#   define LSM9DS1XG_CTRL_REG8_H_LACTIVE          (0x1 << 5)
-#   define LSM9DS1XG_CTRL_REG8_PP_OD              (0x1 << 4)
-#   define LSM9DS1XG_CTRL_REG8_SIM                (0x1 << 3)
-#   define LSM9DS1XG_CTRL_REG8_IF_ADD_INC         (0x1 << 2)
-#   define LSM9DS1XG_CTRL_REG8_BLE                (0x1 << 1)
-#   define LSM9DS1XG_CTRL_REG8_SW_RESET           (0x1 << 0)
 #define LSM9DS1XG_CTRL_REG9                             0x23
-#   define LSM9DS1XG_CTRL_REG9_SLEEP_G            (0x1 << 6)
-#   define LSM9DS1XG_CTRL_REG9_FIFO_TEMP_EN       (0x1 << 4)
-#   define LSM9DS1XG_CTRL_REG9_DRDY_mask_bit      (0x1 << 3)
 #   define LSM9DS1XG_CTRL_REG9_I2C_DISABLE        (0x1 << 2)
-#   define LSM9DS1XG_CTRL_REG9_FIFO_EN            (0x1 << 1)
-#   define LSM9DS1XG_CTRL_REG9_STOP_ON_FTH        (0x1 << 0)
-#define LSM9DS1XG_CTRL_REG10                            0x24
-#   define LSM9DS1XG_CTRL_REG10_ST_G              (0x1 << 2)
-#   define LSM9DS1XG_CTRL_REG10_ST_XL             (0x1 << 0)
-#define LSM9DS1XG_INT_GEN_SRC_XL                        0x26
-#   define LSM9DS1XG_INT_GEN_SRC_XL_IA_XL         (0x1 << 6)
-#   define LSM9DS1XG_INT_GEN_SRC_XL_ZH_XL         (0x1 << 5)
-#   define LSM9DS1XG_INT_GEN_SRC_XL_ZL_XL         (0x1 << 4)
-#   define LSM9DS1XG_INT_GEN_SRC_XL_YH_XL         (0x1 << 3)
-#   define LSM9DS1XG_INT_GEN_SRC_XL_YL_XL         (0x1 << 2)
-#   define LSM9DS1XG_INT_GEN_SRC_XL_XH_XL         (0x1 << 1)
-#   define LSM9DS1XG_INT_GEN_SRC_XL_XL_XL         (0x1 << 0)
-//#define LSM9DS1XG_STATUS_REG                            0x27  //repeat
 #define LSM9DS1XG_OUT_X_L_XL                            0x28
-#define LSM9DS1XG_OUT_X_H_XL                            0x29
-#define LSM9DS1XG_OUT_Y_L_XL                            0x2A
-#define LSM9DS1XG_OUT_Y_H_XL                            0x2B
-#define LSM9DS1XG_OUT_Z_L_XL                            0x2C
-#define LSM9DS1XG_OUT_Z_H_XL                            0x2D
-#define LSM9DS1XG_FIFO_CTRL                             0x2E
-#   define LSM9DS1XG_FIFO_CTRL_FMODE_BYPASS       (0x0 << 5)
-#   define LSM9DS1XG_FIFO_CTRL_FMODE_FIFO         (0x1 << 5)
-#   define LSM9DS1XG_FIFO_CTRL_FMODE_STREAM       (0x3 << 5)
-#   define LSM9DS1XG_FIFO_CTRL_FMODE_B_TO_S       (0x4 << 5)
-#   define LSM9DS1XG_FIFO_CTRL_FMODE_CON          (0x5 << 5)
-#define LSM9DS1XG_FIFO_SRC                              0x2F
-#   define LSM9DS1XG_FIFO_SRC_FTH                 (0x1 << 7)
-#   define LSM9DS1XG_FIFO_SRC_OVRN                (0x1 << 6)
-#define LSM9DS1XG_INT_GEN_CFG_G                         0x30
-#   define LSM9DS1XG_INT_GEN_CFG_G_AOI_G          (0x1 << 7)
-#   define LSM9DS1XG_INT_GEN_CFG_G_LIR_G          (0x1 << 6)
-#   define LSM9DS1XG_INT_GEN_CFG_G_ZHIE_G         (0x1 << 5)
-#   define LSM9DS1XG_INT_GEN_CFG_G_ZLIE_G         (0x1 << 4)
-#   define LSM9DS1XG_INT_GEN_CFG_G_YHIE_G         (0x1 << 3)
-#   define LSM9DS1XG_INT_GEN_CFG_G_YLIE_G         (0x1 << 2)
-#   define LSM9DS1XG_INT_GEN_CFG_G_XHIE_G         (0x1 << 1)
-#   define LSM9DS1XG_INT_GEN_CFG_G_XLIE_G         (0x1 << 0)
-#define LSM9DS1XG_INT_GEN_THS_XH_G                      0x31
-#   define LSM9DS1XG_INT_GEN_THS_XH_G_DCRM_G      (0x1 << 7)
-#define LSM9DS1XG_INT_GEN_THS_XL_G                      0x32
-#define LSM9DS1XG_INT_GEN_THS_YH_G                      0x33
-#define LSM9DS1XG_INT_GEN_THS_YL_G                      0x34
-#define LSM9DS1XG_INT_GEN_THS_ZH_G                      0x35
-#define LSM9DS1XG_INT_GEN_THS_ZL_G                      0x36
-#define LSM9DS1XG_INT_GEN_DUR_G                         0x37
-#   define LSM9DS1XG_INT_GEN_DUR_G_WAIT_G         (0x1 << 7)
+
+
+#define LSM9DS1XG_INT_GEN_DUR_G                         0x37 // for debug
 
 
 
@@ -218,7 +73,7 @@ AP_InertialSensor_Backend *AP_InertialSensor_LSM9DS1::probe(AP_InertialSensor &_
     }
     AP_InertialSensor_LSM9DS1 *sensor =
         new AP_InertialSensor_LSM9DS1(_imu,std::move(dev),
-                                      LSM9DS0_DRY_XG_PIN,
+                                      LSM9DS1_DRY_XG_PIN,
                                       rotation);
     if (!sensor || !sensor->_init_sensor()) {
 
